@@ -187,7 +187,7 @@ deleting comments. All we need to do is create an Angular controller for calling
 ```js
 App.controller('Comments', function($scope) {
   $scope.refresh = function() {
-    $.getJSON('/blog/api/comments?article=' + encodeURIComponent($scope.article.url), function(comments) {
+    $.getJSON('/blog/api/comments?article=' + $scope.article.id, function(comments) {
       $scope.comments = comments;
       $scope.$apply();
     });
