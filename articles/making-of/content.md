@@ -216,7 +216,7 @@ App.controller('Comments', function($scope) {
 });
 ```
 
-Easy right? GitBack will store all comments in [the GitHub repo](https://github.com/bobby-brennan/gitback-blog.git).
+Easy right? GitBack will store all comments in [the GitHub repo](https://github.com/bobby-brennan/gitback-blog/tree/master/comments).
 Leave a note below and you'll see it appear there!
 
 <br>
