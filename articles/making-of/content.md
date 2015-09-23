@@ -104,6 +104,9 @@ We'll write the actual article in content.md:
 This is **my first post**!
 ```
 
+This file will be synced to our GitHub repo at
+[https://github.com/bobby-brennan/gitback-blog/blob/master/articles/making-of/content.md](https://github.com/bobby-brennan/gitback-blog/blob/master/articles/making-of/content.md)
+Note how much nicer it is to view the file on GitHub instead of e.g. inside a JSON document in Mongo.
 
 <br>
 Now we need a Node router to turn our articles into webpages.
