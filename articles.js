@@ -1,6 +1,6 @@
 {
   attachments: {
-    contents: {
+    content: {
       extension: 'md'
     }
   },
