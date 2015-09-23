@@ -41,82 +41,147 @@ We'll see the basics of using GitBack below.
 
 <br>
 ## The Code
-Let's start by writing the first post:
-
-**./blog/hello-world.md**
-```markdown
-This is **my first post**!
+Let's start by creating the datastore with GitBack. This is where articles and comments will live.
+I created a [public repository](https://github.com/bobby-brennan/gitback-blog) on GitHub
+to hold the data...let's add it as a submodule.
+We'll initialize a new Git repository in a folder called database/
+```bash
+git add submodule https://github.com/bobby-brennan/gitback-blog
 ```
 
-<br>
-Now we need a Node router to turn them into webpages. We'll use the npm package
-[marked]('https://www.npmjs.com/package/marked') to render the markdown.
-
-**./routes/blog.js**
-```js
-var Router = module.exports = require('express').Router();
-var Marked = require('marked');
-Router.get('/:post', function() {
-  var file = Path.join('/', req.params.post);
-  file = Path.join(__dirname, '../blog', file + '.md');
-  FS.readFile(file, 'utf8', function(err, contents) {
-    res.render('blog-post', {entry: contents, Marked: Marked});
-  });
-})
-```
-
-<br>
-I like to use Jade for rendering HTML:
-
-**./views/blog-post.jade**
-```jade
-.container
-  .row
-    .col-xs-12.col-lg-10.col-lg-offset-1
-      h1
-        span= entry.title
-      p.small= entry.dateString
-        .clearfix
-      hr
-      div !{Marked(entry.contents)}
-```
-
-<br>
-### Adding Comments
-To enable comments, we'll need a datastore. As I mentioned, we'll be using the open-source GitBack.
-
-**./routes/blog.js**
-```js
-var DB = new Gitback({
-  directory: __dirname + '/../database',
-  remote: 'https://github.com/bobby-brennan/gitback-blog.git',
-});
-
-DB.initialize(function(err) {
-  if (err) throw err;
-  Router.use('/api', DB.router);
-});
-```
-
-GitBack will store all comments in [this GitHub repo](https://github.com/bobby-brennan/gitback-blog.git).
-Leave a note below and you'll see it appear there!
-GitBack will maintain a local copy of that repository in the specified directory. We just need to add a collection:
+We just need to add two collections: comments and articles.
 
 **./database/comments.js**
 ```js
 {
   access: {
     get: 'all',
-    post: 'all',
+    post: 'all'
   }
 }
 ```
+The ```access``` field essentially says that anyone can get (view) and post (add) comments.
 
-We can get fancier by enforcing a particular schema, adding access control,
-or adding middleware to modify the input and output data, but for now we'll accept arbitrary JSON.
+Articles, on the other hand, will be read only:
+
+**./database/articles.js**
+```js
+{
+  access: {
+    get: 'all'
+  },
+  attachments: {
+    content: {
+      extension: 'md'
+    }
+  },
+}
+```
+
+We've also specified a Markdown attachment -
+this way we can keep the Markdown in a separate file rather than inside a JSON document.
+
+We can get fancier by enforcing a particular schema, adding more granular access control,
+or creating middleware to modify the input and output data, but for now we'll accept arbitrary JSON.
 
 <br>
-Now we'll use AngularJS to read and write comments:
+Now let's write our first post!
+GitBack stores each item as ./{collection}/{id}/_item.json
+
+**./database/articles/hello-world/_item.json**
+```js
+{
+  title: "Hello World",
+  description: "My first post",
+  date: "9-22-2015"
+}
+```
+
+We'll write the actual article in content.md:
+
+**./database/articles/hello-world/content.md**
+```markdown
+This is **my first post**!
+```
+
+
+<br>
+Now we need a Node router to turn our articles into webpages.
+
+**./routes/blog.js**
+```js
+var Router = module.exports = require('express').Router();
+var GitBack = require('gitback');
+var DB = new GitBack({
+  directory: __dirname + '/../database',
+  remote: 'https://github.com/bobby-brennan/gitback-blog.git',
+});
+DB.initialize(function(err) {
+  if (err) throw err;
+  Router.use('/api', DB.router);
+});
+
+Router.get('/', function(req, res) {
+  res.render('blog', {articles: DB.collections.articles.get()});
+});
+
+Router.get('/:post', function(req, res) {
+  var article = DB.collections.articles.get(req.params.post);
+  if (!article) return res.status(404).end();
+  res.render('blog-post', {article: article});
+}) 
+```
+
+There's a lot going on there, but we're essentially telling gitback to use
+[https://github.com/bobby-brennan/gitback-blog](https://github.com/bobby-brennan/gitback-blog)
+as it's source of truth, and to keep it's local copy of the data in the ./database directory.
+
+Once the database is initialized, we expose a RESTful API for interacting with it by calling
+```js
+Router.use('/api', DB.router);
+```
+
+You can see it in action by visiting
+[http://bbrennan.info/blog/api/articles](/blog/api/articles)
+or
+[http://bbrennan.info/blog/api/articles/hello_world](/blog/api/articles/hello_world)
+
+Then we set up two routes: one for getting the main page, and one for getting
+a particular post. In each we call ```DB.collections.articles.get()``` to
+retrieve the necessary articles.
+
+<br>
+I like to use Jade for rendering HTML on the server side, and Angular for
+rendering on the client side.  Here's a possible anti-pattern
+I can't seem to ditch - whenever I have data readily available on the server
+that I want to pass to Angular, I render it as a JS variable inside a controller.
+There has to be a better way.
+
+**./views/blog-post.jade**
+```jade
+script.
+  App.controller('Article', function($scope) {
+    $scope.article = !{JSON.stringify(article)};
+  })
+
+.container(ng-controller="Article")
+  .row
+    .col-xs-12.col-lg-10.col-lg-offset-1
+      h1
+        span= article.title
+      p.small= article.dateString
+      hr
+      div(marked="article")
+```
+
+Here I'm using [angular-marked](https://github.com/Hypercubed/angular-marked) to render
+the Markdown.
+
+<br>
+### Adding Comments
+When we initialized GitBack above, it exposed RESTful API endpoints for creating and
+deleting comments. All we need to do is create an Angular controller for calling them.
+
 
 **./static/js/ng/blog-post.js**
 ```js
@@ -145,7 +210,8 @@ App.controller('Comments', function($scope) {
 });
 ```
 
-Easy right? Gitback automatically exposes RESTful endpoints for creating and retrieving comments.
+Easy right? GitBack will store all comments in [the GitHub repo](https://github.com/bobby-brennan/gitback-blog.git).
+Leave a note below and you'll see it appear there!
 
 <br>
 Now we just need to implement the comment UI:
