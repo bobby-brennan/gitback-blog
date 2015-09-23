@@ -118,6 +118,7 @@ var GitBack = require('gitback');
 var DB = new GitBack({
   directory: __dirname + '/../database',
   remote: 'git@github.com:bobby-brennan/gitback-blog.git',
+  refreshRate: 30000,
 });
 DB.initialize(function(err) {
   if (err) throw err;
@@ -138,6 +139,7 @@ Router.get('/:post', function(req, res) {
 There's a lot going on there, but we're essentially telling gitback to use
 [https://github.com/bobby-brennan/gitback-blog](https://github.com/bobby-brennan/gitback-blog)
 as it's source of truth, and to keep it's local copy of the data in the ./database directory.
+Additionally, we'll check the remote repository for changes every 30 seconds.
 
 Note that the local machine will need permission to write to your Git repository. I'm using
 a [deploy key](https://developer.github.com/guides/managing-deploy-keys/).
