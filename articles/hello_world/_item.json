@@ -1,6 +1,6 @@
 {
   "date": "2015-09-21",
   "title": "Hello World!",
-  "description": "My first post"
+  "description": "My first post",
+  "id": "hello_world"
 }
-
