@@ -1,3 +1,5 @@
 {
-  get: 'all'
+  access: {
+    get: 'all'
+  }
 }
