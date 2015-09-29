@@ -49,7 +49,10 @@ what it does and where it's hosted, but exactly how it works.
 The goal of APIs Guru is to become the Wikipedia of APIs. They've been
 using a combination of automated scraping and human curation to crawl
 the web for machine-readable API definitions. They've already added
-over 100 APIs, including Instagram and YouTube, with hundreds more in line.
+over 100 APIs, including
+[Instagram](https://any-api.com/consoles/instagram.com/1.0.0) and
+[YouTube](https://any-api.com/consoles/googleapis.com/youtube/v3),
+with hundreds more in line.
 As more and more services jump onto the Swagger bandwagon, this number will only grow.
 
 Of course, not every API uses Swagger. That's why we've been working together
