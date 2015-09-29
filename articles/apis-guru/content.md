@@ -26,8 +26,8 @@ Swagger specifications for public APIs
 Whether you're a large enterprise, a developer at a start-up, or a lone hacker,
 chances are you rely on multiple APIs to power your software. But integrating with
 a new API is a large commitment - the cost of switching providers or migrating to
-a home-grown solution can be huge. To make matters worse, for common needs (like
-processing credit cards or sending texts) you're faced with a firehose of options.
+a home-grown solution can be huge. To make matters worse, for common needs like
+processing credit cards or sending texts, you're faced with a firehose of options.
 
 API discovery services like AnyAPI and [APIs.io](http://apis.io/) are an attempt
 to alleviate this problem. They allow API consumers to browse available APIs,
