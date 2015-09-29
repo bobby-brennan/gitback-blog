@@ -21,6 +21,7 @@ Swagger specifications for public APIs
 
 
 ## Why is Discovery Important?
+API Discovery is important for both Consumers and Producers of APIs.
 
 ### API Consumers
 Whether you're a large enterprise, a developer at a start-up, or a lone hacker,
