@@ -65,7 +65,7 @@ These documents are repeatedly crawled for changes, and any updates are pushed t
 the [api-models](https://github.com/APIs-guru/api-models) repository on GitHub. This
 means the descriptions provided by APIs Guru always stay up-to-date.
 
-But as we've said, APIs Guru wants to be like Wikipedia - anyone can contribute
+As we've said, APIs Guru wants to be like Wikipedia - anyone can contribute
 improvements. Perhaps a parameter was missing a description, or you found a typo
 in the README. All you have to do is send a pull request to the api-models
 repository!
