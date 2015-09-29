@@ -42,7 +42,7 @@ You built your API because people have a problem you can solve. Now your
 job is to get it in front of them.
 
 Publishing a Swagger specification provides an easy way for you to
-annouce your API to the world - not only
+announce your API to the world - not only
 what it does and where it's hosted, but exactly how it works.
 
 
@@ -58,7 +58,7 @@ As more and more services jump onto the Swagger bandwagon, this number will only
 
 Of course, not every API uses Swagger. That's why we've been working together
 on an open source project, aptly named [api-spec-converter](https://github.com/lucybot/api-spec-converter).
-Most machine-readable API descriptions are interchangable - they simply
+Most machine-readable API descriptions are interchangeable - they simply
 describe a set of URLs, inputs, and outputs. APIs Guru uses api-spec-converter
 to convert description formats such as API Blueprint and I/O Docs to Swagger 2.0.
 
