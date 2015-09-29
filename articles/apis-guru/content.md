@@ -11,7 +11,7 @@ reasons:
 
 But the benefit I want to talk about here is one of the most crucial: **Discovery**.
 
-The two services I want to highlight here are:
+The two services I want to highlight are:
 
 [APIs Guru](https://github.com/APIs-guru/api-models) - An open source repository of
 Swagger specifications for public APIs
@@ -31,7 +31,7 @@ processing credit cards or sending texts) you're faced with a firehose of option
 
 API discovery services like AnyAPI and [APIs.io](http://apis.io/) are an attempt
 to alleviate this problem. They allow API consumers to browse available APIs,
-make test calls (often using demo credentials), and judge whether a given APIs
+make test calls, and judge whether a given APIs
 functionality will cover their needs.
 
 ### API Providers
