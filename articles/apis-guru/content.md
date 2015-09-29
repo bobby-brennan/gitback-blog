@@ -94,4 +94,4 @@ will become much easier to navigate.
 *Need help documenting your API? LucyBot offers both hosted and on-premise
 solutions for creating documentation, test consoles,
 and cookbooks for working with both private and public APIs.
-Contact info@lucybot.com to learn more.*
+Contact [info@lucybot.com](mailto:info@lucybot.com) to learn more.*
