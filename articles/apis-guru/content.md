@@ -31,11 +31,11 @@ processing credit cards or sending texts) you're faced with a firehose of option
 
 API discovery services like AnyAPI and [APIs.io](http://apis.io/) are an attempt
 to alleviate this problem. They allow API consumers to browse available APIs,
-make test calls, and judge whether a given APIs
+make test calls, and judge whether a given API's
 functionality will cover their needs.
 
 ### API Providers
-Simply put, Discovery is important because if you don't have any users, it
+Simply put, discovery is important because if you don't have any users, it
 doesn't matter how well designed and tested and loadbalanced your API is.
 You built your API because people have a problem you can solve. Now your
 job is to get it in front of them.
@@ -47,7 +47,7 @@ what it does and where it's hosted, but exactly how it works.
 
 ## Enter APIs Guru
 The goal of APIs Guru is to become the Wikipedia of APIs. They've been
-using a combination of automated scrapting and human curation to crawl
+using a combination of automated scraping and human curation to crawl
 the web for machine-readable API definitions. They've already added
 over 100, with hundreds more in line. As more and more services jump onto
 the Swagger bandwagon, this number will only grow.
