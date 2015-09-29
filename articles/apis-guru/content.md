@@ -1,3 +1,7 @@
+<div class="text-center">
+  <img src="http://apis-guru.github.io/images/logo.svg">
+</div>
+
 At LucyBot, we've been fans of [Swagger](http://swagger.io/) from day one.
 The push to create machine-readable API definitions is nothing new, but the industry
 seems to be converging on Swagger as a standard. If the ecosystem of tools
@@ -82,6 +86,17 @@ wants to integrate with a number of popular APIs. Possible use cases include:
 * Reliability testing
 * Usage reports
 * SDK Generation
+
+### Yo Dawg, I heard you like APIs
+Of course, no API-related service would be complete without an API of its own.
+APIs Guru uses GitHub to serve JSON documents, allowing you to retrieve a list
+of every API in the repository, or details for a given API.
+
+Here's the master list:
+[http://apis-guru.github.io/api-models/api/v1/list.json](http://apis-guru.github.io/api-models/api/v1/list.json)
+
+And here's the latest version of Instagram's API:
+[https://apis-guru.github.io/api-models/instagram.com/1.0.0/swagger.json](https://apis-guru.github.io/api-models/instagram.com/1.0.0/swagger.json)
 
 ## The Future of API Discovery
 More and more API providers are utilizing machine-readable definitions like
