@@ -75,6 +75,20 @@ without their changes being overwritten? Fortunately APIs Guru
 applies any contributions as a patch. This means they can pull
 in changes to the API without discarding edits.
 
+### More than just Discovery
+APIs Guru is not just great for finding APIs - it can be used by anyone who
+wants to integrate with a number of popular APIs. Possible use cases include:
+* Reliability testing
+* Usage reports
+* SDK Generation
+
+## The Future of API Discovery
+More and more API providers are utilizing machine-readable definitions like
+Swagger. My prediction (and hope) is that within a few years nearly every
+major API will publish an official definition. With the help of services
+like APIs Guru and clients like AnyAPI, the decision to integrate a new API
+will become much easier to navigate.
+
 ---
 
 Need help documenting your API? LucyBot offers both hosted and on-premise
