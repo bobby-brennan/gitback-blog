@@ -178,7 +178,7 @@ script.
         span= article.title
       p.small= article.dateString
       hr
-      div(marked="article")
+      div(marked="article.contents")
 ```
 
 Here I'm using [angular-marked](https://github.com/Hypercubed/angular-marked) to render
