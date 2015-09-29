@@ -2,6 +2,8 @@
   <img src="http://apis-guru.github.io/images/logo.svg">
 </div>
 
+---
+
 At LucyBot, we've been fans of [Swagger](http://swagger.io/) from day one.
 The push to create machine-readable API definitions is nothing new, but the industry
 seems to be converging on Swagger as a standard. If the ecosystem of tools
