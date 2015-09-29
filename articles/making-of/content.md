@@ -43,10 +43,9 @@ We'll see the basics of using GitBack below.
 ## The Code
 Let's start by creating the datastore with GitBack. This is where articles and comments will live.
 I created a [public repository](https://github.com/bobby-brennan/gitback-blog) on GitHub
-to hold the data...let's add it as a submodule.
-We'll initialize a new Git repository in a folder called database/
+to hold the data...let's add it as a submodule in the folder ./database/
 ```bash
-git add submodule https://github.com/bobby-brennan/gitback-blog
+git submodule add https://github.com/bobby-brennan/gitback-blog database
 ```
 
 We just need to add two collections: comments and articles.
