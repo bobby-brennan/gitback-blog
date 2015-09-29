@@ -132,7 +132,7 @@ Router.get('/:post', function(req, res) {
   var article = DB.collections.articles.get(req.params.post);
   if (!article) return res.status(404).end();
   res.render('blog-post', {article: article});
-}) 
+});
 ```
 
 There's a lot going on there, but we're essentially telling gitback to use
