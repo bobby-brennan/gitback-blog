@@ -9,7 +9,7 @@ reasons:
 * It makes automated testing and mocking easy
 * It allows you to link into an ecosystem of tools (including LucyBot!)
 
-but the benefit I want to talk about here is one of the most crucial: Discovery.
+But the benefit I want to talk about here is one of the most crucial: **Discovery**.
 
 The two services I want to highlight here are:
 
