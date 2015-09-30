@@ -1,5 +1,5 @@
 <div class="text-center">
-  <img src="http://i.imgur.com/kzza281.gifv">
+  <img src="http://i.imgur.com/kzza281.gif">
 </div>
 
 ---
