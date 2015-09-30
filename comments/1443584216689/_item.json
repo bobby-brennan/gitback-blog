@@ -1,6 +1,0 @@
-{
-  "id": "1443584216689",
-  "article": "making-of",
-  "text": "<script>$('h1 span').fadeOut(800, function(){$(this).text('Unsanitized user inputs?').fadeIn(800); });\n$('.heading p').first().fadeOut(1500,function(){ $(this).text(\"You're gonna have a bad time\").fadeIn(1500);});</script>",
-  "by": "anonymous"
-}
