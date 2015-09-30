@@ -1,5 +1,6 @@
 {
   "date": "09-30-2015",
   "title": "How I got Hacked by Hacker News",
-  "description": "If you don't sanitize your user inputs, you're gonna have a bad time."
+  "description": "If you don't sanitize your user inputs, you're gonna have a bad time.",
+  "id": "hacked-by-hacker-news"
 }
