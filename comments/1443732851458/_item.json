@@ -1,0 +1,6 @@
+{
+  "id": "1443732851458",
+  "article": "hacked-by-hacker-news",
+  "text": "A better lesson would be:\n\n1. Don't trust user input ever\n2. If in doubt, see rule 1\n3. Defensively code always\n4. Expect failure",
+  "by": "Jeff Schroeder"
+}
