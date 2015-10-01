@@ -1,5 +1,5 @@
 <div class="text-center">
-  <img src="http://apis-guru.github.io/images/logo.svg">
+  <img src="https://apis-guru.github.io/api-models/branding/logo_horizontal.svg">
 </div>
 
 ---
