@@ -75,7 +75,7 @@ var svg = d3.select("#Fifteen")
 
 svg.append("path")
     .attr("class", "line")
-    .attr("d", valueline(data));
+    .attr("d", valueline(baseWages));
 svg.append("g")
     .attr("class", "x axis")
     .attr("transform", "translate(0," + height + ")")
