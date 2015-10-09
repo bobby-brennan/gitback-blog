@@ -1,21 +1,136 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js">
-</script>
+<style>
+  path { 
+      stroke: steelblue;
+      stroke-width: 2;
+      fill: none;
+  }
+  .key {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin-left: 40px;
+  }
+  .govt {
+    stroke: #D91E18;
+    background-color: #D91E18;
+  }
+  .wage {
+    stroke: #26A65B;
+    background-color: #26A65B;
+  }
+  .axis path,
+  .axis line {
+      fill: none;
+      stroke: grey;
+      stroke-width: 1;
+      shape-rendering: crispEdges;
+  }
+  .graph {
+    font-weight: 200;
+  }
+  .graph .title {
+    font-weight: 800;
+  }
+</style>
 <script>
-var margin = {top: 30, right: 20, bottom: 30, left: 50},
-    width = 600 - margin.left - margin.right,
-    height = 270 - margin.top - margin.bottom;
-var x = d3.scale.linear().range([width, 0]);
-var y = d3.scale.linear().range([height, 0]);
-x.domain([0, 20]);
-y.domain([0, 20]);
-var xAxis = d3.svg.axis().scale(x)
-    .orient("bottom").ticks(5);
-var yAxis = d3.svg.axis().scale(y)
-    .orient("left").ticks(5);
-var baseWages = [];
-for (i = 0; i <= 15; ++i) baseWages.push(i);
-</script>
+  var margin = {top: 30, right: 20, bottom: 80, left: 80},
+      width = 450 - margin.left - margin.right,
+      height = 300 - margin.top - margin.bottom;
+  var x = d3.scale.linear().range([width, 0]);
+  var y = d3.scale.linear().range([height, 0]);
+  var xAxis = d3.svg.axis().scale(x)
+      .orient("bottom").ticks(5);
+  var yAxis = d3.svg.axis().scale(y)
+      .orient("left").ticks(5);
+  var addDollarSign = function(d) {return '$' + d};
+  xAxis.tickFormat(addDollarSign);
+  yAxis.tickFormat(addDollarSign);
 
+  var MAX_BASE = 30;
+  var MAX_NET = 30;
+  var baseWages = [];
+  for (i = 0; i <= MAX_BASE; ++i) baseWages.push(i);
+  x.domain([MAX_BASE, 0]);
+  y.domain([0, MAX_NET]);
+
+  var Graphs = {};
+  Graphs.Half = {
+    title: "Supplementing half way to $15",
+    graph: function(base) {
+      return Math.max(0, (15 - base) / 2) + base;
+    }
+  }
+  Graphs.Full = {
+    title: "Supplementing all the way to $7.50",
+    graph: function(base) {
+      return Math.max(7.5, base);
+    }
+  }
+  Graphs.Third = {
+    title: "Supplementing one-third of the way to $22.50",
+    graph: function(base) {
+      return Math.max(0, (22.5 - base) / 3) + base;
+    }
+  }
+
+  function initGraphs() {
+    for (graph in Graphs) initGraph(graph);
+  }
+
+  function initGraph(name) {
+    var valueline = d3.svg.line()
+      .x(function(d) { return x(d); })
+      .y(function(d) { return y(Graphs[name].graph(d)); });
+    var govtContrib = d3.svg.line()
+      .x(function(d) { return x(d) })
+      .y(function(d) { return y(Graphs[name].graph(d) - d) })
+
+    var svg = d3.select("#" + name)
+      .append("svg")
+          .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+          .attr("transform", 
+                "translate(" + margin.left + "," + margin.top + ")");
+
+    svg.append("path")
+        .attr("class", "wage")
+        .attr("d", valueline(baseWages));
+
+    svg.append("path")
+        .attr("class", "govt")
+        .attr("d", govtContrib(baseWages));
+
+    svg.append("text")
+        .attr("class", "title")
+        .attr("x", width / 2)
+        .attr("y", 0)
+        .style("text-anchor", "middle")
+        .text(Graphs[name].title)
+
+    svg.append("g")
+        .attr("class", "x axis")
+        .attr("transform", "translate(0," + height + ")")
+        .call(xAxis);
+    svg.append("text")
+        .attr("x", width / 2)
+        .attr("y",  height + 50)
+        .style("text-anchor", "middle")
+        .text("Employer Contribution");
+
+    svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+    /*
+    svg.append("text")
+        .attr("x",  -height / 2)
+        .attr("y", 30 - margin.left)
+        .attr("transform", "rotate(-90)")
+        .style("text-anchor", "middle")
+        .text("Net Wage");
+    */
+  }
+</script>
 
 ## Overview
 The idea that workers should be guaranteed enough income to fulfill their basic needs
@@ -59,34 +174,27 @@ fraction to, say, one-third of the way to $15/hour, the employee sees an additio
 every extra dollar they earn. We can even create more complex functions, so that the
 lowest-paid workers have the strongest incentives to seek out higher pay.
 
-#### Graphs
-<div id="Fifteen"></div>
-<script>
-var valueline = d3.svg.line()
-  .x(function(d) { return x(d); })
-  .y(function(d) { return y((15 - d)/2 + d); });
-var svg = d3.select("#Fifteen")
-  .append("svg")
-      .attr("width", width + margin.left + margin.right)
-      .attr("height", height + margin.top + margin.bottom)
-  .append("g")
-      .attr("transform", 
-            "translate(" + margin.left + "," + margin.top + ")");
+### Graphs
+The following graphs show the effects of different subsidised-wage policies on net
+wages earned. Each policy guarantees a minimum wage of $7.50/hour. The green line
+represents the amount employees take home after the government subsidy is added, and
+its slope represents the marginal utility of getting a raise.
 
-svg.append("path")
-    .attr("class", "line")
-    .attr("d", valueline(baseWages));
-svg.append("g")
-    .attr("class", "x axis")
-    .attr("transform", "translate(0," + height + ")")
-    .call(xAxis);
-svg.append("g")
-    .attr("class", "y axis")
-    .call(yAxis);
-</script>
+For the simplest case, where the government tops up everyone's paycheck to $7.50 an hour,
+the slope is initially flat, meaning that a $1 raise from the employer adds nothing
+to the employee's take-home.
 
-someone at $0 and hour, and 
-(15 - emp) / 2 = govt
+Each graph has an inflection point where the government subsidy ends, and the slope of
+the green line becomes 1 - meaning that every extra $1 earned results in $1 of take-home
+pay.
+
+<br><br>
+<div class="key wage"></div> Net Wages
+<div class="key govt"></div> Government Contribution
+<br><br>
+<div class="graph" id="Full"></div>
+<div class="graph" id="Half"></div>
+<div class="graph" id="Third"></div>
 
 ## Benefits
 * Full employment
@@ -127,3 +235,7 @@ fundamentalists.
 [3] https://en.wikipedia.org/wiki/Earned_income_tax_credit#Cost
 
 http://www.manhattan-institute.org/pdf/ib_37.pdf
+
+<script>
+  initGraphs();
+</script>
