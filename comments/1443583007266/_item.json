@@ -1,0 +1,6 @@
+{
+  "id": "1443583007266",
+  "article": "hello_world",
+  "text": "<script>alert('XSS!');</script>",
+  "by": "anonymous"
+}
