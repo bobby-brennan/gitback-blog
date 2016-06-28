@@ -1,5 +1,5 @@
 <div class="text-center">
-  <img src="https://apis-guru.github.io/api-models/branding/logo_horizontal.svg">
+  <img src="https://apis.guru/branding/logo_horizontal.svg">
 </div>
 
 ---
@@ -95,10 +95,10 @@ APIs Guru uses GitHub to serve JSON documents, allowing you to retrieve a list
 of every API in the repository, or details for a given API.
 
 Here's the master list:
-[http://apis-guru.github.io/api-models/api/v1/list.json](http://apis-guru.github.io/api-models/api/v1/list.json)
+[http://api.apis.guru/v2/list.json](http://api.apis.guru/v2/list.json)
 
 And here's the latest version of Instagram's API:
-[https://apis-guru.github.io/api-models/instagram.com/1.0.0/swagger.json](https://apis-guru.github.io/api-models/instagram.com/1.0.0/swagger.json)
+[https://apis-guru.github.io/api-models/instagram.com/1.0.0/swagger.json](https://api.apis.guru/v2/specs/instagram.com/1.0.0/swagger.json)
 
 ## The Future of API Discovery
 More and more API providers are utilizing machine-readable definitions like
